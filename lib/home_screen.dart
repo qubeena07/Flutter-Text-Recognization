@@ -57,24 +57,28 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red[100],
       appBar: AppBar(
+        backgroundColor: Colors.redAccent,
         title: const Text("Text Recognition"),
       ),
-      body: SingleChildScrollView(
-        child: Center(
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (textScanning) const CircularProgressIndicator(),
               (!textScanning && imageFile == null)
                   ? Container(
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 226, 226, 226),
+                          borderRadius: BorderRadius.circular(20)),
                       width: 300,
                       height: 300,
-                      color: Colors.grey,
                     )
                   : Image.file(File(imageFile!.path)),
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Text(scannedText)
+              const SizedBox(
+                height: 10,
+              ),
+              textScanning
+                  ? const CircularProgressIndicator()
+                  : Text(
+                      scannedText,
+                      style: const TextStyle(fontWeight: FontWeight.w400),
+                    )
             ],
           ),
         ),
@@ -116,6 +128,7 @@ class IconWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.all(10),
